@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加传感器 - Android应用远程配置管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="mx-auto max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- 标题栏 -->
+        <div class="bg-blue-600 px-6 py-4">
+            <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-plus-circle mr-2"></i>
+                添加传感器配置
+            </h2>
+        </div>
+        
+        <!-- 表单内容 -->
+        <div class="p-6">
+            <form id="addSensorForm" class="space-y-8">
+                <!-- 传感器基本信息 -->
+                <div class="bg-blue-50 p-4 rounded-md mb-6">
+                    <h3 class="text-lg font-medium text-blue-800 mb-4">传感器基本信息</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="sensorId" class="block text-sm font-medium text-gray-700 mb-1">传感器ID<span class="text-red-500">*</span></label>
+                            <input type="number" id="sensorId" name="sensorId" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入传感器ID" max="999" required>
+                            <p class="mt-1 text-xs text-gray-500">最大长度3个数字</p>
+                        </div>
+                        <div>
+                            <label for="sensorName" class="block text-sm font-medium text-gray-700 mb-1">传感器名称<span class="text-red-500">*</span></label>
+                            <input type="text" id="sensorName" name="sensorName" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入传感器名称" maxlength="30" required>
+                            <p class="mt-1 text-xs text-gray-500">不超过30个字符</p>
+                        </div>
+                        <div>
+                            <label for="modelNumber" class="block text-sm font-medium text-gray-700 mb-1">物模型编号<span class="text-red-500">*</span></label>
+                            <input type="number" id="modelNumber" name="modelNumber" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入物模型编号" min="101" max="99999" required>
+                            <p class="mt-1 text-xs text-gray-500">大于100小于100000的整数</p>
+                        </div>
+                        <div>
+                            <label for="modelName" class="block text-sm font-medium text-gray-700 mb-1">物模型名称<span class="text-red-500">*</span></label>
+                            <input type="text" id="modelName" name="modelName" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入物模型名称" maxlength="30" required>
+                            <p class="mt-1 text-xs text-gray-500">不超过30个字符</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 采集项列表 -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-800">传感器采集项配置</h3>
+                        <button type="button" id="addCollectionItem" class="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <i class="fas fa-plus mr-1"></i>
+                            添加采集项
+                        </button>
+                    </div>
+                    
+                    <!-- 采集项内容容器 -->
+                    <div id="collectionItems">
+                        <!-- 采集项1 -->
+                        <div class="collection-item bg-gray-50 p-4 rounded-md mb-4 border border-gray-200">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-gray-700">采集项 #1</h4>
+                                <button type="button" class="remove-item text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i>
+                                    删除
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">采集项名称<span class="text-red-500">*</span></label>
+                                    <input type="text" name="itemName[]" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入采集项名称" maxlength="30" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">采集项单位<span class="text-red-500">*</span></label>
+                                    <input type="text" name="itemUnit[]" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入采集项单位" maxlength="10" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">水文标识<span class="text-red-500">*</span></label>
+                                    <input type="text" name="hydrologicalId[]" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入水文标识" maxlength="2" pattern="[0-9]{1,2}" required>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">采集指令<span class="text-red-500">*</span></label>
+                                    <input type="text" name="collectionCommand[]" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入采集指令" maxlength="10" pattern="[0-9]+" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">倍率<span class="text-red-500">*</span></label>
+                                    <input type="number" name="multiplier[]" step="0.01" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入倍率" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">数据类型<span class="text-red-500">*</span></label>
+                                    <input type="text" name="dataType[]" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入数据类型" maxlength="30" required>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">触发值<span class="text-red-500">*</span></label>
+                                    <input type="number" name="triggerValue[]" step="0.01" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入触发值" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">上限值<span class="text-red-500">*</span></label>
+                                    <input type="number" name="upperLimit[]" step="0.01" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入上限值" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">下限值<span class="text-red-500">*</span></label>
+                                    <input type="number" name="lowerLimit[]" step="0.01" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入下限值" required>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">修正值<span class="text-red-500">*</span></label>
+                                    <input type="number" name="correctionValue[]" step="0.01" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入修正值" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">阈值次数<span class="text-red-500">*</span></label>
+                                    <input type="number" name="thresholdCount[]" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border" placeholder="请输入阈值次数" max="999" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 按钮区域 -->
+                <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+                    <button type="button" id="cancelBtn" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        取消
+                    </button>
+                    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        保存
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 成功提示弹窗 -->
+    <div id="successModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+            <div class="flex items-center justify-center text-green-500 mb-4">
+                <i class="fas fa-check-circle text-5xl"></i>
+            </div>
+            <h3 class="text-xl font-medium text-gray-900 text-center mb-2">保存成功</h3>
+            <p class="text-gray-500 text-center mb-6">传感器配置已成功保存</p>
+            <div class="flex justify-center">
+                <button id="closeSuccessModal" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('addSensorForm');
+            const addCollectionItemBtn = document.getElementById('addCollectionItem');
+            const collectionItemsContainer = document.getElementById('collectionItems');
+            const successModal = document.getElementById('successModal');
+            const closeSuccessModalBtn = document.getElementById('closeSuccessModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            let itemCount = 1;
+            
+            // 添加采集项按钮点击事件
+            addCollectionItemBtn.addEventListener('click', function() {
+                if (itemCount < 3) { // 最多3个采集项
+                    itemCount++;
+                    const template = document.querySelector('.collection-item').cloneNode(true);
+                    template.querySelector('h4').textContent = `采集项 #${itemCount}`;
+                    
+                    // 清空所有输入框的值
+                    template.querySelectorAll('input').forEach(input => {
+                        input.value = '';
+                    });
+                    
+                    // 为新添加的删除按钮绑定事件
+                    template.querySelector('.remove-item').addEventListener('click', function() {
+                        this.closest('.collection-item').remove();
+                        itemCount--;
+                        
+                        // 重新编号
+                        const items = collectionItemsContainer.querySelectorAll('.collection-item');
+                        items.forEach((item, index) => {
+                            item.querySelector('h4').textContent = `采集项 #${index + 1}`;
+                        });
+                        
+                        // 如果删除后小于3个，重新启用添加按钮
+                        if (itemCount < 3) {
+                            addCollectionItemBtn.disabled = false;
+                            addCollectionItemBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        }
+                    });
+                    
+                    collectionItemsContainer.appendChild(template);
+                    
+                    // 如果达到3个，禁用添加按钮
+                    if (itemCount >= 3) {
+                        addCollectionItemBtn.disabled = true;
+                        addCollectionItemBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+            });
+            
+            // 为初始的删除按钮绑定事件
+            document.querySelector('.remove-item').addEventListener('click', function() {
+                if (itemCount > 1) { // 至少保留一个采集项
+                    this.closest('.collection-item').remove();
+                    itemCount--;
+                    
+                    // 重新编号
+                    const items = collectionItemsContainer.querySelectorAll('.collection-item');
+                    items.forEach((item, index) => {
+                        item.querySelector('h4').textContent = `采集项 #${index + 1}`;
+                    });
+                    
+                    // 如果删除后小于3个，重新启用添加按钮
+                    if (itemCount < 3) {
+                        addCollectionItemBtn.disabled = false;
+                        addCollectionItemBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+            });
+            
+            // 取消按钮点击事件
+            cancelBtn.addEventListener('click', function() {
+                window.location.href = 'sensor-config.html';
+            });
+            
+            // 表单提交事件
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 执行表单验证和数据处理逻辑
+                // ...
+                
+                // 显示成功提示
+                successModal.classList.remove('hidden');
+            });
+            
+            // 关闭成功提示弹窗
+            closeSuccessModalBtn.addEventListener('click', function() {
+                successModal.classList.add('hidden');
+                // 返回到列表页
+                window.location.href = 'sensor-config.html';
+            });
+        });
+    </script>
+</body>
+</html> 

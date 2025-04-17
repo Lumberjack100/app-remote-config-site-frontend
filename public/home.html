@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置模块 - Android应用远程配置管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 顶部导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold text-gray-800">Android应用远程配置管理系统</a>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-gray-600 mr-4">欢迎, medo_gh</span>
+                    <button class="px-3 py-1 rounded text-gray-600 hover:bg-gray-100">
+                        <i class="fas fa-sign-out-alt mr-1"></i>退出
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 主内容区 -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">配置模块管理</h1>
+            <p class="text-gray-600 mt-1">选择您需要管理的配置模块</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-lg font-medium mb-4">可用配置模块</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 配置模块卡片 -->
+                <a href="sensor-config.html" class="block hover:shadow-lg transition-shadow duration-300">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="bg-blue-50 px-4 py-3 border-b border-gray-200">
+                            <h3 class="font-medium text-blue-700">MR702-遥测终端机传感器配置</h3>
+                        </div>
+                        <div class="px-4 py-5">
+                            <div class="flex items-center text-gray-600 mb-2">
+                                <i class="fas fa-microchip mr-2 text-blue-500"></i>
+                                <span>传感器数据管理</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-cog mr-2 text-blue-500"></i>
+                                <span>配置参数管理</span>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-sm text-gray-500">最近更新: 2024-07-12</span>
+                                <span class="text-blue-600 flex items-center text-sm">
+                                    管理配置
+                                    <i class="fas fa-chevron-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- 未来可能添加的其他模块位置 -->
+                <div class="border border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center p-6 text-gray-400">
+                    <i class="fas fa-plus-circle text-3xl mb-2"></i>
+                    <span>未来添加更多配置模块</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="bg-white shadow-inner py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 text-sm">© 2024 Android应用远程配置管理系统. 版权所有.</p>
+        </div>
+    </footer>
+</body>
+</html> 

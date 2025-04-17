@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传感器详情 - Android应用远程配置管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="mx-auto max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- 标题栏 -->
+        <div class="bg-blue-600 px-6 py-4">
+            <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-info-circle mr-2"></i>
+                传感器配置详情
+            </h2>
+        </div>
+        
+        <!-- 内容区 -->
+        <div class="p-6">
+            <!-- 传感器基本信息 -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">传感器基本信息</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="text-sm font-medium text-gray-500 mb-1">传感器ID</div>
+                        <div class="text-base text-gray-900">002</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-500 mb-1">传感器名称</div>
+                        <div class="text-base text-gray-900">温度传感器</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-500 mb-1">物模型编号</div>
+                        <div class="text-base text-gray-900">10002</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-500 mb-1">物模型名称</div>
+                        <div class="text-base text-gray-900">温度测量模型</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 采集项列表 -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-800 mb-4 pb-2 border-b border-gray-200">传感器采集项配置</h3>
+                
+                <!-- 采集项1 -->
+                <div class="bg-gray-50 p-4 rounded-md mb-6 border border-gray-200">
+                    <h4 class="font-medium text-gray-700 mb-4 pb-2 border-b border-gray-100">采集项 #1 - 温度</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">采集项名称</div>
+                            <div class="text-base text-gray-900">温度</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">采集项单位</div>
+                            <div class="text-base text-gray-900">℃</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">水文标识</div>
+                            <div class="text-base text-gray-900">02</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">采集指令</div>
+                            <div class="text-base text-gray-900">1001</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">倍率</div>
+                            <div class="text-base text-gray-900">1.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">数据类型</div>
+                            <div class="text-base text-gray-900">float</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">触发值</div>
+                            <div class="text-base text-gray-900">40.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">上限值</div>
+                            <div class="text-base text-gray-900">60.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">下限值</div>
+                            <div class="text-base text-gray-900">-20.0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">修正值</div>
+                            <div class="text-base text-gray-900">0.5</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">阈值次数</div>
+                            <div class="text-base text-gray-900">3</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 采集项2 -->
+                <div class="bg-gray-50 p-4 rounded-md mb-6 border border-gray-200">
+                    <h4 class="font-medium text-gray-700 mb-4 pb-2 border-b border-gray-100">采集项 #2 - 温度报警</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">采集项名称</div>
+                            <div class="text-base text-gray-900">温度报警</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">采集项单位</div>
+                            <div class="text-base text-gray-900">报警状态</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">水文标识</div>
+                            <div class="text-base text-gray-900">03</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">采集指令</div>
+                            <div class="text-base text-gray-900">1002</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">倍率</div>
+                            <div class="text-base text-gray-900">1.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">数据类型</div>
+                            <div class="text-base text-gray-900">int</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">触发值</div>
+                            <div class="text-base text-gray-900">1.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">上限值</div>
+                            <div class="text-base text-gray-900">1.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">下限值</div>
+                            <div class="text-base text-gray-900">0.0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">修正值</div>
+                            <div class="text-base text-gray-900">0.0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-500 mb-1">阈值次数</div>
+                            <div class="text-base text-gray-900">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 按钮区域 -->
+            <div class="flex justify-end mt-8 pt-6 border-t border-gray-200">
+                <a href="sensor-config.html" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    返回列表
+                </a>
+                <a href="edit-sensor.html" class="ml-3 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    编辑
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

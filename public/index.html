@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android应用远程配置管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container {
+            margin-bottom: 50px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .page-title {
+            background-color: #f8fafc;
+            padding: 10px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: bold;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            min-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold mb-8 text-center">Android应用远程配置管理系统原型</h1>
+        
+        <!-- 登录页面 -->
+        <div class="page-container bg-white shadow-md">
+            <div class="page-title">登录页面</div>
+            <iframe src="login.html" height="600"></iframe>
+        </div>
+        
+        <!-- 配置模块主页面 -->
+        <div class="page-container bg-white shadow-md">
+            <div class="page-title">配置模块主页面</div>
+            <iframe src="home.html" height="600"></iframe>
+        </div>
+        
+        <!-- MR702-遥测终端机传感器配置页面 -->
+        <div class="page-container bg-white shadow-md">
+            <div class="page-title">MR702-遥测终端机传感器配置页面</div>
+            <iframe src="sensor-config.html" height="800"></iframe>
+        </div>
+        
+        <!-- 传感器配置参数新增弹窗页面 -->
+        <div class="page-container bg-white shadow-md">
+            <div class="page-title">传感器配置参数新增弹窗页面</div>
+            <iframe src="add-sensor.html" height="800"></iframe>
+        </div>
+        
+        <!-- 传感器配置参数编辑弹窗页面 -->
+        <div class="page-container bg-white shadow-md">
+            <div class="page-title">传感器配置参数编辑弹窗页面</div>
+            <iframe src="edit-sensor.html" height="800"></iframe>
+        </div>
+        
+        <!-- 传感器配置参数详情弹窗页面 -->
+        <div class="page-container bg-white shadow-md">
+            <div class="page-title">传感器配置参数详情弹窗页面</div>
+            <iframe src="detail-sensor.html" height="800"></iframe>
+        </div>
+    </div>
+</body>
+</html> 
