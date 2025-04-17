@@ -239,14 +239,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useSensorConfigStore } from '~/stores/sensorConfig';
-import type { SensorConfig } from '~/types';
-
-// Define components
+// Define route middleware
 definePageMeta({
   middleware: ['auth']
 });
+
+import { ref, computed, onMounted } from 'vue';
+import { useSensorConfigStore } from '~/stores/sensorConfig';
+import type { SensorConfig } from '~/types';
 
 // Get store
 const sensorStore = useSensorConfigStore();

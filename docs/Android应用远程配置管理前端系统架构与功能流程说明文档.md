@@ -1,0 +1,179 @@
+# Android应用远程配置管理前端系统架构与功能流程说明文档
+
+## 1. 系统概述
+
+本系统是一个Android应用远程配置管理平台的前端界面，主要用于管理和配置Android设备上的传感器参数，实现远程对传感器的配置更新和数据采集。系统采用现代Web技术栈构建，提供用户友好的界面，支持用户进行传感器配置的增删改查等操作。
+
+## 2. 技术架构
+
+### 2.1 技术栈
+
+- **前端框架**：Nuxt 3 (Vue 3)
+- **UI组件库**：自定义组件 + Tailwind CSS
+- **状态管理**：Pinia
+- **图标库**：FontAwesome
+- **HTTP客户端**：Axios
+- **数据验证**：vee-validate
+- **工具库**：VueUse
+
+### 2.2 架构模式
+
+系统采用模块化架构，基于Nuxt 3框架实现，主要包含以下层次：
+
+- **视图层(View)**: 页面组件和UI组件
+- **状态层(State)**: Pinia状态管理
+- **服务层(Service)**: API封装和数据处理
+- **模型层(Model)**: 数据类型定义
+
+### 2.3 目录结构
+
+```
+app-remote-config-site-frontend/
+├── pages/ - 页面组件
+├── components/ - UI组件
+├── stores/ - Pinia状态存储
+├── composables/ - 组合式API
+├── types/ - 类型定义
+├── layouts/ - 布局组件
+├── middleware/ - 中间件
+├── plugins/ - 插件
+├── assets/ - 静态资源
+└── public/ - 公共资源
+```
+
+## 3. 核心数据模型
+
+### 3.1 用户模型(User)
+
+```typescript
+interface User {
+  id: number;
+  account: string;
+  name: string;
+  companyId: number;
+  companyName: string;
+}
+```
+
+### 3.2 传感器配置模型(SensorConfig)
+
+```typescript
+interface SensorConfig {
+  id: string;
+  sensorId: number;
+  sensorName: string;
+  modelToken: number;
+  modelName: string;
+  port: string;
+  modelFields: SensorField[];
+}
+```
+
+### 3.3 传感器字段模型(SensorField)
+
+```typescript
+interface SensorField {
+  collectionName: string;
+  collectionUnit: string;
+  hydrologicalSign: string;
+  collectionCommand: string;
+  ratio: number;
+  dataType: string;
+  triggerValue: number;
+  upperLimit: number;
+  lowerLimit: number;
+  correctionValue: number;
+  thresholdCount: number;
+}
+```
+
+## 4. 功能模块
+
+### 4.1 用户认证模块
+
+- **登录功能**: 验证用户身份并获取授权令牌
+- **自动身份验证**: 使用Token维持用户登录状态
+- **登出功能**: 清除用户会话
+
+### 4.2 传感器配置管理模块
+
+- **传感器列表查询**: 支持分页、筛选和排序
+- **传感器添加**: 创建新的传感器配置
+- **传感器编辑**: 修改现有传感器配置
+- **传感器删除**: 单个或批量删除传感器配置
+- **传感器详情查看**: 查看传感器详细信息
+
+## 5. 业务流程
+
+### 5.1 用户登录流程
+
+1. 用户输入账号和密码
+2. 系统通过API发送登录请求
+3. 服务器验证信息并返回用户信息和Token
+4. 前端保存Token到Cookie并存储用户信息
+5. 导航至系统主页
+
+### 5.2 传感器配置管理流程
+
+1. **查询流程**:
+   - 用户设置筛选条件(接口、传感器名称)
+   - 系统获取符合条件的传感器列表
+   - 显示分页结果
+
+2. **添加流程**:
+   - 用户点击"添加传感器"按钮
+   - 弹出添加模态框
+   - 用户填写传感器信息
+   - 提交后将数据发送到服务器
+   - 更新传感器列表
+
+3. **编辑流程**:
+   - 用户点击传感器的编辑按钮
+   - 弹出编辑模态框并加载现有数据
+   - 用户修改传感器信息
+   - 提交后将更新数据发送到服务器
+   - 更新传感器列表
+
+4. **删除流程**:
+   - 用户选择要删除的传感器
+   - 点击删除按钮，弹出确认对话框
+   - 确认后发送删除请求
+   - 更新传感器列表
+
+## 6. 接口设计
+
+系统通过REST API与后端服务交互，主要接口包括：
+
+### 6.1 认证接口
+
+- **登录**: POST /auth/SignIn
+- **获取用户信息**: GET /auth/GetUserByToken
+
+### 6.2 传感器配置接口
+
+- **获取传感器列表**: GET /config/QueryMR702SensorConfigList
+- **添加传感器**: POST /config/AddMR702SensorConfigItem
+- **编辑传感器**: POST /config/EditMR702SensorConfigItem
+- **删除传感器**: POST /config/BatchDeleteMR702SensorConfigItem
+
+## 7. 安全机制
+
+- **Token认证**: 使用JWT进行身份验证
+- **请求拦截**: Axios拦截器自动添加Token
+- **响应拦截**: 处理401未授权错误并重定向
+- **路由保护**: 使用中间件保护需要认证的页面
+
+## 8. 异常处理
+
+- API请求异常处理和提示
+- 表单验证错误处理
+- 认证失效自动跳转
+
+## 9. 扩展性设计
+
+系统设计考虑了以下扩展性因素：
+
+- 模块化架构便于新功能添加
+- 类型系统支持数据模型扩展
+- API服务封装支持新接口集成
+- 组件化设计支持UI复用和扩展
