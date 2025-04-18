@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import type { ApiResponse, PaginatedResponse, LoginRequest, LoginResponse, SensorConfig } from '../types';
+import type { ApiResponse, PaginatedResponse, LoginRequest, LoginResponse, SensorConfig, UserInfo } from '../types';
 
 export const useApi = () => {
   const config = useRuntimeConfig();
@@ -17,7 +17,7 @@ export const useApi = () => {
   instance.interceptors.request.use(
     (config) => {
       if (token.value) {
-        config.headers['Authorization'] = `Bearer ${token.value}`;
+        config.headers['Authorization'] = token.value;
       }
       return config;
     },
@@ -42,10 +42,14 @@ export const useApi = () => {
   // Auth API
   const auth = {
     login: (data: LoginRequest) => 
-      instance.post<ApiResponse<LoginResponse>>('/auth/SignIn', data).then(res => res.data),
+      instance.post<ApiResponse<string>>('/auth/SignIn', data, {
+        headers: {
+          'access_type': 'android'
+        }
+      }).then(res => res.data),
     
     getUserInfo: () => 
-      instance.get<ApiResponse<any>>('/auth/GetUserByToken').then(res => res.data),
+      instance.get<ApiResponse<UserInfo>>('/auth/GetUserByToken').then(res => res.data),
   };
   
   // Sensor Config API

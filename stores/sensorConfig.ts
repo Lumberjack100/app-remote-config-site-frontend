@@ -52,11 +52,11 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
         });
         
         if (response.code === 200) {
-          this.sensorList = response.data.items;
-          this.total = response.data.total;
+          this.sensorList = response.data.items || [];
+          this.total = response.data.total || 0;
           return true;
         } else {
-          this.error = response.message || '获取传感器列表失败';
+          this.error = response.msg || '获取传感器列表失败';
           return false;
         }
       } catch (error: any) {
@@ -78,7 +78,7 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
           await this.fetchSensorList();
           return true;
         } else {
-          this.error = response.message || '添加传感器失败';
+          this.error = response.msg || '添加传感器失败';
           return false;
         }
       } catch (error: any) {
@@ -100,7 +100,7 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
           await this.fetchSensorList();
           return true;
         } else {
-          this.error = response.message || '编辑传感器失败';
+          this.error = response.msg || '编辑传感器失败';
           return false;
         }
       } catch (error: any) {
@@ -123,7 +123,7 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
           await this.fetchSensorList();
           return true;
         } else {
-          this.error = response.message || '删除传感器失败';
+          this.error = response.msg || '删除传感器失败';
           return false;
         }
       } catch (error: any) {

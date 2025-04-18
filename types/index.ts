@@ -7,6 +7,13 @@ export interface User {
   companyName: string;
 }
 
+export interface UserInfo {
+  subjectID: number;
+  subjectName: string;
+  companyID: number;
+  companyName: string;
+}
+
 // Sensor configuration types
 export interface SensorField {
   collectionName: string;
@@ -35,13 +42,13 @@ export interface SensorConfig {
 // API response types
 export interface ApiResponse<T> {
   code: number;
-  message: string;
+  msg: string | null;
   data: T;
 }
 
 export interface PaginatedResponse<T> {
   code: number;
-  message: string;
+  msg: string | null;
   data: {
     items: T[];
     total: number;
@@ -58,5 +65,4 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   token: string;
-  user: User;
 } 

@@ -105,7 +105,8 @@ async function onSubmit() {
   const success = await authStore.login(username.value, password.value);
   
   if (success) {
-    // Redirect is handled by the auth middleware
+    // Explicitly navigate to home page
+    navigateTo('/');
   }
 }
 </script> 
