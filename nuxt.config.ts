@@ -30,8 +30,11 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    // 服务器端环境变量
+    apiSecret: process.env.API_SECRET,
+    // 客户端环境变量
     public: {
-      apiBase: process.env.API_BASE_URL || 'http://localhost:8000/api/v1'
+      apiBase: process.env.API_BASE_URL,
     }
   },
 
