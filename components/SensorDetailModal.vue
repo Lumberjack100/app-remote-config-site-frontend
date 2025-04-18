@@ -25,7 +25,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p class="text-sm font-medium text-gray-500">传感器ID</p>
-                  <p class="mt-1">{{ sensor.sensorId }}</p>
+                  <p class="mt-1">{{ sensor.sensorID }}</p>
                 </div>
                 <div>
                   <p class="text-sm font-medium text-gray-500">传感器名称</p>
@@ -49,24 +49,24 @@
             <!-- 采集项信息 -->
             <div>
               <h4 class="text-lg font-medium text-gray-900 mb-4">采集项配置</h4>
-              <div v-for="(field, index) in sensor.modelFields" :key="index" class="mb-6 p-4 bg-gray-50 rounded-lg">
+              <div v-for="(field, index) in sensor.modelFieldList" :key="index" class="mb-6 p-4 bg-gray-50 rounded-lg">
                 <h5 class="font-medium text-gray-900 mb-3">采集项 {{ index + 1 }}</h5>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
                     <p class="text-sm font-medium text-gray-500">采集项名称</p>
-                    <p class="mt-1">{{ field.collectionName }}</p>
+                    <p class="mt-1">{{ field.fieldName }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">采集项单位</p>
-                    <p class="mt-1">{{ field.collectionUnit }}</p>
+                    <p class="mt-1">{{ field.engUnit }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">水文标识</p>
-                    <p class="mt-1">{{ field.hydrologicalSign }}</p>
+                    <p class="mt-1">{{ field.hydrologicalIdentification }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">采集指令</p>
-                    <p class="mt-1">{{ field.collectionCommand }}</p>
+                    <p class="mt-1">{{ field.collectionInstructions }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">倍率</p>
@@ -74,7 +74,7 @@
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">数据类型</p>
-                    <p class="mt-1">{{ field.dataType }}</p>
+                    <p class="mt-1">{{ field.dataFormat }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">触发值</p>
@@ -90,11 +90,11 @@
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">修正值</p>
-                    <p class="mt-1">{{ field.correctionValue }}</p>
+                    <p class="mt-1">{{ field.correctValue }}</p>
                   </div>
                   <div>
                     <p class="text-sm font-medium text-gray-500">阈值次数</p>
-                    <p class="mt-1">{{ field.thresholdCount }}</p>
+                    <p class="mt-1">{{ field.ngateval }}</p>
                   </div>
                 </div>
               </div>

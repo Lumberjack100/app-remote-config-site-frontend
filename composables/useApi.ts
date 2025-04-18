@@ -55,7 +55,7 @@ export const useApi = () => {
   // Sensor Config API
   const sensorConfig = {
     getList: (params: { page: number, pageSize: number, port?: string, sensorName?: string }) => 
-      instance.get<PaginatedResponse<SensorConfig>>('/config/QueryMR702SensorConfigList', { params }).then(res => res.data),
+      instance.post<PaginatedResponse<SensorConfig>>('/config/QueryMR702SensorConfigList', params).then(res => res.data),
     
     addSensor: (data: Omit<SensorConfig, 'id'>) => 
       instance.post<ApiResponse<any>>('/config/AddMR702SensorConfigItem', data).then(res => res.data),

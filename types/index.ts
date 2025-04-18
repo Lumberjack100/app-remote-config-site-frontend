@@ -16,27 +16,27 @@ export interface UserInfo {
 
 // Sensor configuration types
 export interface SensorField {
-  collectionName: string;
-  collectionUnit: string;
-  hydrologicalSign: string;
-  collectionCommand: string;
+  fieldName: string;
+  engUnit: string;
+  hydrologicalIdentification: string;
+  collectionInstructions: string;
   ratio: number;
-  dataType: string;
+  dataFormat: string;
   triggerValue: number;
   upperLimit: number;
   lowerLimit: number;
-  correctionValue: number;
-  thresholdCount: number;
+  correctValue: number;
+  ngateval: number;
 }
 
 export interface SensorConfig {
   id: string;
-  sensorId: number;
+  sensorID: number;
   sensorName: string;
   modelToken: number;
   modelName: string;
   port: string;
-  modelFields: SensorField[];
+  modelFieldList: SensorField[];
 }
 
 // API response types
@@ -50,10 +50,8 @@ export interface PaginatedResponse<T> {
   code: number;
   msg: string | null;
   data: {
-    items: T[];
-    total: number;
-    page: number;
-    pageSize: number;
+    sensorList: T[];
+    total?: number;
   }
 }
 

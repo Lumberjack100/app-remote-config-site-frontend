@@ -29,7 +29,7 @@
                     type="text" 
                     class="input bg-gray-100" 
                     disabled 
-                    :value="formData.sensorId" 
+                    :value="formData.sensorID" 
                   />
                 </div>
                 <div class="form-group">
@@ -87,7 +87,7 @@
                   type="button" 
                   class="btn-secondary text-sm py-1" 
                   @click="addModelField" 
-                  :disabled="formData.modelFields.length >= 2"
+                  :disabled="formData.modelFieldList.length >= 2"
                 >
                   <font-awesome-icon icon="plus" class="mr-1" />
                   新增采集项
@@ -95,14 +95,14 @@
               </div>
               
               <div 
-                v-for="(field, index) in formData.modelFields" 
+                v-for="(field, index) in formData.modelFieldList" 
                 :key="index" 
                 class="mb-6 p-4 bg-gray-50 rounded-lg relative"
               >
                 <div class="flex justify-between items-center mb-4">
                   <h5 class="font-medium text-gray-900">采集项 {{ index + 1 }}</h5>
                   <button 
-                    v-if="formData.modelFields.length > 1" 
+                    v-if="formData.modelFieldList.length > 1" 
                     type="button" 
                     class="text-red-500 hover:text-red-700"
                     @click="removeModelField(index)"
@@ -116,7 +116,7 @@
                   <div class="form-group">
                     <label class="form-label">采集项名称</label>
                     <input 
-                      v-model="field.collectionName" 
+                      v-model="field.fieldName" 
                       type="text" 
                       class="input" 
                       placeholder="请输入采集项名称"
@@ -130,7 +130,7 @@
                   <div class="form-group">
                     <label class="form-label">采集项单位</label>
                     <input 
-                      v-model="field.collectionUnit" 
+                      v-model="field.engUnit" 
                       type="text" 
                       class="input" 
                       placeholder="请输入采集项单位"
@@ -144,7 +144,7 @@
                   <div class="form-group">
                     <label class="form-label">水文标识</label>
                     <input 
-                      v-model="field.hydrologicalSign" 
+                      v-model="field.hydrologicalIdentification" 
                       type="text" 
                       class="input" 
                       placeholder="请输入水文标识"
@@ -159,7 +159,7 @@
                   <div class="form-group">
                     <label class="form-label">采集指令</label>
                     <input 
-                      v-model="field.collectionCommand" 
+                      v-model="field.collectionInstructions" 
                       type="text" 
                       class="input" 
                       placeholder="请输入采集指令"
@@ -188,7 +188,7 @@
                   <div class="form-group">
                     <label class="form-label">数据类型</label>
                     <input 
-                      v-model="field.dataType" 
+                      v-model="field.dataFormat" 
                       type="text" 
                       class="input" 
                       placeholder="请输入数据类型"
@@ -244,7 +244,7 @@
                   <div class="form-group">
                     <label class="form-label">修正值</label>
                     <input 
-                      v-model.number="field.correctionValue" 
+                      v-model.number="field.correctValue" 
                       type="number" 
                       class="input" 
                       placeholder="请输入修正值"
@@ -258,7 +258,7 @@
                   <div class="form-group">
                     <label class="form-label">阈值次数</label>
                     <input 
-                      v-model.number="field.thresholdCount" 
+                      v-model.number="field.ngateval" 
                       type="number" 
                       class="input" 
                       placeholder="请输入阈值次数"
@@ -318,12 +318,12 @@ const loading = ref(false);
 // Create a deep copy of the sensor data for editing
 const formData = reactive<SensorConfig>({
   id: '',
-  sensorId: 0,
+  sensorID: 0,
   sensorName: '',
   modelToken: 0,
   modelName: '',
   port: '485-1',
-  modelFields: []
+  modelFieldList: []
 });
 
 // Field level validation errors
@@ -340,34 +340,34 @@ const errors = reactive({
 watch(() => props.sensor, (newSensor) => {
   if (newSensor) {
     formData.id = newSensor.id;
-    formData.sensorId = newSensor.sensorId;
+    formData.sensorID = newSensor.sensorID;
     formData.sensorName = newSensor.sensorName;
     formData.modelToken = newSensor.modelToken;
     formData.modelName = newSensor.modelName;
     formData.port = newSensor.port;
     // Deep clone the fields array
-    formData.modelFields = newSensor.modelFields.map(field => ({...field}));
+    formData.modelFieldList = newSensor.modelFieldList.map(field => ({...field}));
   }
 }, { immediate: true });
 
 // Add a new model field
 function addModelField() {
-  if (formData.modelFields.length < 2) {
-    formData.modelFields.push(sensorStore.createNewSensorField());
+  if (formData.modelFieldList.length < 2) {
+    formData.modelFieldList.push(sensorStore.createNewSensorField());
   }
 }
 
 // Remove a model field
 function removeModelField(index: number) {
-  if (formData.modelFields.length > 1) {
-    formData.modelFields.splice(index, 1);
+  if (formData.modelFieldList.length > 1) {
+    formData.modelFieldList.splice(index, 1);
     
     // Also remove any errors for this field
     const newFieldErrors = {...fieldErrors.value};
     delete newFieldErrors[index];
     
     // Reindex the errors for fields after the removed one
-    for (let i = index; i < formData.modelFields.length; i++) {
+    for (let i = index; i < formData.modelFieldList.length; i++) {
       if (newFieldErrors[i + 1]) {
         newFieldErrors[i] = newFieldErrors[i + 1];
         delete newFieldErrors[i + 1];
@@ -419,37 +419,37 @@ function validateForm(): boolean {
   }
   
   // Validate each model field
-  formData.modelFields.forEach((field, index) => {
+  formData.modelFieldList.forEach((field, index) => {
     const fieldError: Record<string, string> = {};
     
-    if (!field.collectionName.trim()) {
+    if (!field.fieldName.trim()) {
       fieldError.collectionName = '请输入采集项名称';
       isValid = false;
-    } else if (field.collectionName.length > 30) {
+    } else if (field.fieldName.length > 30) {
       fieldError.collectionName = '采集项名称不能超过30个字符';
       isValid = false;
     }
     
-    if (!field.collectionUnit.trim()) {
+    if (!field.engUnit.trim()) {
       fieldError.collectionUnit = '请输入采集项单位';
       isValid = false;
-    } else if (field.collectionUnit.length > 10) {
+    } else if (field.engUnit.length > 10) {
       fieldError.collectionUnit = '采集项单位不能超过10个字符';
       isValid = false;
     }
     
-    if (!field.hydrologicalSign.trim()) {
+    if (!field.hydrologicalIdentification.trim()) {
       fieldError.hydrologicalSign = '请输入水文标识';
       isValid = false;
-    } else if (!/^\d{1,2}$/.test(field.hydrologicalSign)) {
+    } else if (!/^\d{1,2}$/.test(field.hydrologicalIdentification)) {
       fieldError.hydrologicalSign = '水文标识必须为1-2位数字';
       isValid = false;
     }
     
-    if (!field.collectionCommand.trim()) {
+    if (!field.collectionInstructions.trim()) {
       fieldError.collectionCommand = '请输入采集指令';
       isValid = false;
-    } else if (!/^\d{1,10}$/.test(field.collectionCommand)) {
+    } else if (!/^\d{1,10}$/.test(field.collectionInstructions)) {
       fieldError.collectionCommand = '采集指令必须为1-10位数字';
       isValid = false;
     }
@@ -459,10 +459,10 @@ function validateForm(): boolean {
       isValid = false;
     }
     
-    if (!field.dataType.trim()) {
+    if (!field.dataFormat.trim()) {
       fieldError.dataType = '请输入数据类型';
       isValid = false;
-    } else if (field.dataType.length > 30) {
+    } else if (field.dataFormat.length > 30) {
       fieldError.dataType = '数据类型不能超过30个字符';
       isValid = false;
     }
@@ -482,15 +482,15 @@ function validateForm(): boolean {
       isValid = false;
     }
     
-    if (field.correctionValue === undefined || field.correctionValue === null) {
+    if (field.correctValue === undefined || field.correctValue === null) {
       fieldError.correctionValue = '请输入修正值';
       isValid = false;
     }
     
-    if (!field.thresholdCount) {
+    if (!field.ngateval) {
       fieldError.thresholdCount = '请输入阈值次数';
       isValid = false;
-    } else if (field.thresholdCount < 1 || field.thresholdCount > 999) {
+    } else if (field.ngateval < 1 || field.ngateval > 999) {
       fieldError.thresholdCount = '阈值次数必须为1-999之间的整数';
       isValid = false;
     }
