@@ -301,7 +301,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch, computed } from 'vue';
 import { useSensorConfigStore } from '~/stores/sensorConfig';
-import type { SensorConfig, SensorField } from '~/types';
+import type { SensorConfig, SensorField } from '../types';
 
 const props = defineProps<{
   sensor: SensorConfig | null;

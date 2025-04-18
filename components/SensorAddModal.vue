@@ -305,7 +305,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { useSensorConfigStore } from '~/stores/sensorConfig';
-import type { SensorConfig } from '~/types';
+import type { SensorConfig } from '../types';
 
 const emit = defineEmits<{
   (e: 'close'): void;

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { SensorConfig, SensorField } from '~/types';
+import type { SensorConfig, SensorField } from '../types';
 
 const DEFAULT_SENSOR_FIELD: SensorField = {
   collectionName: '',

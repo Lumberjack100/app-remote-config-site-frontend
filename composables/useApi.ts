@@ -1,5 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { ApiResponse, PaginatedResponse, LoginRequest, LoginResponse, SensorConfig } from '~/types';
+import axios from 'axios';
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { ApiResponse, PaginatedResponse, LoginRequest, LoginResponse, SensorConfig } from '../types';
 
 export const useApi = () => {
   const config = useRuntimeConfig();

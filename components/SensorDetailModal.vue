@@ -117,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { SensorConfig } from '~/types';
+import type { SensorConfig } from '../types';
 
 defineProps<{
   sensor: SensorConfig | null;
