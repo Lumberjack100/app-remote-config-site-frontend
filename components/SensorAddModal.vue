@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label">传感器ID</label>
-                  <input v-model.number="formData.sensorID" type="number" class="input" placeholder="请输入传感器ID"
+                  <input v-model="formData.sensorID" type="number" class="input" placeholder="请输入传感器ID"
                     :class="{'border-red-500': errors.sensorId}" min="1" max="999" />
                   <p v-if="errors.sensorId" class="error-text">{{ errors.sensorId }}</p>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label">物模型编号</label>
-                  <input v-model.number="formData.modelToken" type="number" class="input" placeholder="请输入物模型编号"
+                  <input v-model="formData.modelToken" type="number" class="input" placeholder="请输入物模型编号"
                     :class="{'border-red-500': errors.modelToken}" min="100" max="99999" />
                   <p v-if="errors.modelToken" class="error-text">{{ errors.modelToken }}</p>
                 </div>
@@ -84,38 +84,38 @@
                   <div class="form-group">
                     <label class="form-label">采集项名称</label>
                     <input v-model="field.fieldName" type="text" class="input" placeholder="请输入采集项名称"
-                      :class="{'border-red-500': getFieldError(index, 'collectionName')}" maxlength="30" />
-                    <p v-if="getFieldError(index, 'collectionName')" class="error-text">
-                      {{ getFieldError(index, 'collectionName') }}
+                      :class="{'border-red-500': getFieldError(index, 'fieldName')}" maxlength="30" />
+                    <p v-if="getFieldError(index, 'fieldName')" class="error-text">
+                      {{ getFieldError(index, 'fieldName') }}
                     </p>
                   </div>
                   <div class="form-group">
                     <label class="form-label">采集项单位</label>
                     <input v-model="field.engUnit" type="text" class="input" placeholder="请输入采集项单位"
-                      :class="{'border-red-500': getFieldError(index, 'collectionUnit')}" maxlength="10" />
-                    <p v-if="getFieldError(index, 'collectionUnit')" class="error-text">
-                      {{ getFieldError(index, 'collectionUnit') }}
+                      :class="{'border-red-500': getFieldError(index, 'engUnit')}" maxlength="10" />
+                    <p v-if="getFieldError(index, 'engUnit')" class="error-text">
+                      {{ getFieldError(index, 'engUnit') }}
                     </p>
                   </div>
                   <div class="form-group">
                     <label class="form-label">水文标识</label>
                     <input v-model="field.hydrologicalIdentification" type="text" class="input" placeholder="请输入水文标识"
-                      :class="{'border-red-500': getFieldError(index, 'hydrologicalSign')}" maxlength="5" />
-                    <p v-if="getFieldError(index, 'hydrologicalSign')" class="error-text">
-                      {{ getFieldError(index, 'hydrologicalSign') }}
+                      :class="{'border-red-500': getFieldError(index, 'hydrologicalIdentification')}" maxlength="5" />
+                    <p v-if="getFieldError(index, 'hydrologicalIdentification')" class="error-text">
+                      {{ getFieldError(index, 'hydrologicalIdentification') }}
                     </p>
                   </div>
                   <div class="form-group">
                     <label class="form-label">采集指令</label>
                     <input v-model="field.collectionInstructions" type="text" class="input" placeholder="请输入采集指令"
-                      :class="{'border-red-500': getFieldError(index, 'collectionCommand')}" maxlength="10" />
-                    <p v-if="getFieldError(index, 'collectionCommand')" class="error-text">
-                      {{ getFieldError(index, 'collectionCommand') }}
+                      :class="{'border-red-500': getFieldError(index, 'collectionInstructions')}" maxlength="10" />
+                    <p v-if="getFieldError(index, 'collectionInstructions')" class="error-text">
+                      {{ getFieldError(index, 'collectionInstructions') }}
                     </p>
                   </div>
                   <div class="form-group">
                     <label class="form-label">倍率</label>
-                    <input v-model.number="field.ratio" type="number" class="input" placeholder="请输入倍率"
+                    <input v-model="field.ratio" type="number" class="input" placeholder="请输入倍率"
                       :class="{'border-red-500': getFieldError(index, 'ratio')}" step="any" />
                     <p v-if="getFieldError(index, 'ratio')" class="error-text">
                       {{ getFieldError(index, 'ratio') }}
@@ -124,14 +124,14 @@
                   <div class="form-group">
                     <label class="form-label">数据类型</label>
                     <input v-model="field.dataFormat" type="text" class="input" placeholder="请输入数据类型"
-                      :class="{'border-red-500': getFieldError(index, 'dataType')}" maxlength="30" />
-                    <p v-if="getFieldError(index, 'dataType')" class="error-text">
-                      {{ getFieldError(index, 'dataType') }}
+                      :class="{'border-red-500': getFieldError(index, 'dataFormat')}" maxlength="30" />
+                    <p v-if="getFieldError(index, 'dataFormat')" class="error-text">
+                      {{ getFieldError(index, 'dataFormat') }}
                     </p>
                   </div>
                   <div class="form-group">
                     <label class="form-label">触发值</label>
-                    <input v-model.number="field.triggerValue" type="number" class="input" placeholder="请输入触发值"
+                    <input v-model="field.triggerValue" type="number" class="input" placeholder="请输入触发值"
                       :class="{'border-red-500': getFieldError(index, 'triggerValue')}" step="any" />
                     <p v-if="getFieldError(index, 'triggerValue')" class="error-text">
                       {{ getFieldError(index, 'triggerValue') }}
@@ -139,7 +139,7 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label">上限值</label>
-                    <input v-model.number="field.upperLimit" type="number" class="input" placeholder="请输入上限值"
+                    <input v-model="field.upperLimit" type="number" class="input" placeholder="请输入上限值"
                       :class="{'border-red-500': getFieldError(index, 'upperLimit')}" step="any" />
                     <p v-if="getFieldError(index, 'upperLimit')" class="error-text">
                       {{ getFieldError(index, 'upperLimit') }}
@@ -147,7 +147,7 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label">下限值</label>
-                    <input v-model.number="field.lowerLimit" type="number" class="input" placeholder="请输入下限值"
+                    <input v-model="field.lowerLimit" type="number" class="input" placeholder="请输入下限值"
                       :class="{'border-red-500': getFieldError(index, 'lowerLimit')}" step="any" />
                     <p v-if="getFieldError(index, 'lowerLimit')" class="error-text">
                       {{ getFieldError(index, 'lowerLimit') }}
@@ -155,18 +155,18 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label">修正值</label>
-                    <input v-model.number="field.correctValue" type="number" class="input" placeholder="请输入修正值"
-                      :class="{'border-red-500': getFieldError(index, 'correctionValue')}" step="any" />
-                    <p v-if="getFieldError(index, 'correctionValue')" class="error-text">
-                      {{ getFieldError(index, 'correctionValue') }}
+                    <input v-model="field.correctValue" type="number" class="input" placeholder="请输入修正值"
+                      :class="{'border-red-500': getFieldError(index, 'correctValue')}" step="any" />
+                    <p v-if="getFieldError(index, 'correctValue')" class="error-text">
+                      {{ getFieldError(index, 'correctValue') }}
                     </p>
                   </div>
                   <div class="form-group">
                     <label class="form-label">阈值次数</label>
-                    <input v-model.number="field.ngateval" type="number" class="input" placeholder="请输入阈值次数"
-                      :class="{'border-red-500': getFieldError(index, 'thresholdCount')}" min="1" max="999" />
-                    <p v-if="getFieldError(index, 'thresholdCount')" class="error-text">
-                      {{ getFieldError(index, 'thresholdCount') }}
+                    <input v-model="field.ngateval" type="number" class="input" placeholder="请输入阈值次数"
+                      :class="{'border-red-500': getFieldError(index, 'ngateval')}" min="1" max="999" />
+                    <p v-if="getFieldError(index, 'ngateval')" class="error-text">
+                      {{ getFieldError(index, 'ngateval') }}
                     </p>
                   </div>
                 </div>
@@ -280,10 +280,7 @@ function validateForm(): boolean {
   if (!formData.modelToken) {
     errors.modelToken = '请输入物模型编号';
     isValid = false;
-  } else if (formData.modelToken <= 100 || formData.modelToken >= 100000) {
-    errors.modelToken = '物模型编号必须大于100小于100000';
-    isValid = false;
-  }
+  } 
   
   if (!formData.modelName.trim()) {
     errors.modelName = '请输入物模型名称';
@@ -298,34 +295,34 @@ function validateForm(): boolean {
     const fieldError: Record<string, string> = {};
     
     if (!field.fieldName.trim()) {
-      fieldError.collectionName = '请输入采集项名称';
+      fieldError.fieldName = '请输入采集项名称';
       isValid = false;
     } else if (field.fieldName.length > 30) {
-      fieldError.collectionName = '采集项名称不能超过30个字符';
+      fieldError.fieldName = '采集项名称不能超过30个字符';
       isValid = false;
     }
     
     if (!field.engUnit.trim()) {
-      fieldError.collectionUnit = '请输入采集项单位';
+      fieldError.engUnit = '请输入采集项单位';
       isValid = false;
     } else if (field.engUnit.length > 10) {
-      fieldError.collectionUnit = '采集项单位不能超过10个字符';
+      fieldError.engUnit = '采集项单位不能超过10个字符';
       isValid = false;
     }
     
     if (!field.hydrologicalIdentification.trim()) {
-      fieldError.hydrologicalSign = '请输入水文标识';
+      fieldError.hydrologicalIdentification = '请输入水文标识';
       isValid = false;
     } else if (!/^[0-9a-zA-Z]{1,5}$/.test(field.hydrologicalIdentification)) {
-      fieldError.hydrologicalSign = '水文标识必须为1-5位数字/字母';
+      fieldError.hydrologicalIdentification = '水文标识必须为1-5位数字/字母';
       isValid = false;
     }
     
     if (!field.collectionInstructions.trim()) {
-      fieldError.collectionCommand = '请输入采集指令';
+      fieldError.collectionInstructions = '请输入采集指令';
       isValid = false;
     } else if (!/^[0-9a-zA-Z]{1,10}$/.test(field.collectionInstructions)) {
-      fieldError.collectionCommand = '采集指令必须为1-10位数字/字母';
+      fieldError.collectionInstructions = '采集指令必须为1-10位数字/字母';
       isValid = false;
     }
     
@@ -335,10 +332,10 @@ function validateForm(): boolean {
     }
     
     if (!field.dataFormat.trim()) {
-      fieldError.dataType = '请输入数据类型';
+      fieldError.dataFormat = '请输入数据类型';
       isValid = false;
     } else if (field.dataFormat.length > 30) {
-      fieldError.dataType = '数据类型不能超过30个字符';
+      fieldError.dataFormat = '数据类型不能超过30个字符';
       isValid = false;
     }
     
@@ -358,15 +355,15 @@ function validateForm(): boolean {
     }
     
     if (field.correctValue === undefined || field.correctValue === null) {
-      fieldError.correctionValue = '请输入修正值';
+      fieldError.correctValue = '请输入修正值';
       isValid = false;
     }
     
     if (!field.ngateval) {
-      fieldError.thresholdCount = '请输入阈值次数';
+      fieldError.ngateval = '请输入阈值次数';
       isValid = false;
-    } else if (field.ngateval < 1 || field.ngateval > 999) {
-      fieldError.thresholdCount = '阈值次数必须为1-999之间的整数';
+    } else if (parseInt(field.ngateval) < 1 || parseInt(field.ngateval) > 999) {
+      fieldError.ngateval = '阈值次数必须为1-999之间的整数';
       isValid = false;
     }
     
@@ -378,9 +375,24 @@ function validateForm(): boolean {
   return isValid;
 }
 
+// 在提交表单前，确保数值字段保持字符串类型
+function prepareFormData() {
+  formData.modelFieldList.forEach(field => {
+    field.ratio = field.ratio.toString();
+    field.triggerValue = field.triggerValue.toString();
+    field.upperLimit = field.upperLimit.toString();
+    field.lowerLimit = field.lowerLimit.toString();
+    field.correctValue = field.correctValue.toString();
+    field.ngateval = field.ngateval.toString();
+  });
+}
+
 // Handle form submission
 async function handleSubmit() {
   if (!validateForm()) return;
+  
+  // 确保数值字段以字符串形式提交
+  prepareFormData();
   
   loading.value = true;
   try {

@@ -73,17 +73,17 @@ interface SensorConfig {
 
 ```typescript
 interface SensorField {
-  collectionName: string;
-  collectionUnit: string;
-  hydrologicalSign: string;
-  collectionCommand: string;
+  fieldName: string;
+  engUnit: string;
+  hydrologicalIdentification: string;
+  collectionInstructions: string;
   ratio: number;
-  dataType: string;
+  dataFormat: string;
   triggerValue: number;
   upperLimit: number;
   lowerLimit: number;
-  correctionValue: number;
-  thresholdCount: number;
+  correctValue: number;
+  ngateval: number;
 }
 ```
 

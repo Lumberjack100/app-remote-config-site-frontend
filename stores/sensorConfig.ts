@@ -6,19 +6,19 @@ const DEFAULT_SENSOR_FIELD: SensorField = {
   engUnit: '',
   hydrologicalIdentification: '',
   collectionInstructions: '',
-  ratio: 1,
+  ratio: '1',
   dataFormat: '',
-  triggerValue: 0,
-  upperLimit: 0,
-  lowerLimit: 0,
-  correctValue: 0,
-  ngateval: 1
+  triggerValue: '0',
+  upperLimit: '0',
+  lowerLimit: '0',
+  correctValue: '0',
+  ngateval: '1'
 };
 
 export const useSensorConfigStore = defineStore('sensorConfig', {
   state: () => ({
     sensorList: [] as SensorConfig[],
-    selectedSensorIds: [] as string[],
+    selectedSensorIds: [] as number[],
     currentSensor: null as SensorConfig | null,
     loading: false,
     error: null as string | null,
@@ -60,24 +60,24 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
           
           if (response.data && response.data.sensorList) {
             this.sensorList = response.data.sensorList.map((item: any) => ({
-              id: item.id.toString(),
-              sensorId: item.sensorID || 0,
+              id: Number(item.id),
+              sensorID: item.sensorID || 0,
               sensorName: item.sensorName || '',
-              modelToken: parseInt(item.modelToken) || 0,
+              modelToken: item.modelToken || '',
               modelName: item.modelName || '',
               port: item.port || '',
-              modelFields: (item.modelFieldList || []).map((field: any) => ({
-                collectionName: field.fieldName || '',
-                collectionUnit: field.engUnit || '',
-                hydrologicalSign: field.hydrologicalIdentification || '',
-                collectionCommand: field.collectionInstructions || '',
-                ratio: parseFloat(field.ratio) || 1,
-                dataType: field.dataFormat || '',
-                triggerValue: parseFloat(field.triggerValue) || 0,
-                upperLimit: parseFloat(field.upperLimit) || 0,
-                lowerLimit: parseFloat(field.lowerLimit) || 0,
-                correctionValue: parseFloat(field.correctValue) || 0,
-                thresholdCount: parseInt(field.ngateval) || 1
+              modelFieldList: (item.modelFieldList || []).map((field: any) => ({
+                fieldName: field.fieldName || '',
+                engUnit: field.engUnit || '',
+                hydrologicalIdentification: field.hydrologicalIdentification || '',
+                collectionInstructions: field.collectionInstructions || '',
+                ratio: String(field.ratio) || '1',
+                dataFormat: field.dataFormat || '',
+                triggerValue: String(field.triggerValue) || '0',
+                upperLimit: String(field.upperLimit) || '0',
+                lowerLimit: String(field.lowerLimit) || '0',
+                correctValue: String(field.correctValue) || '0',
+                ngateval: String(field.ngateval) || '1'
               }))
             }));
             
@@ -109,7 +109,12 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
       this.error = null;
       
       try {
-        const response = await api.sensorConfig.addSensor(sensor);
+        const apiSensor = {
+          ...sensor,
+          modelToken: sensor.modelToken.toString()
+        };
+
+        const response = await api.sensorConfig.addSensor(apiSensor);
         if (response.code === 200) {
           await this.fetchSensorList();
           return true;
@@ -147,13 +152,13 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
       }
     },
     
-    async deleteSensors(ids: string[]) {
+    async deleteSensors(ids: number[]) {
       const api = useApi();
       this.loading = true;
       this.error = null;
       
       try {
-        const response = await api.sensorConfig.deleteSensor(ids);
+        const response = await api.sensorConfig.deleteSensor(ids.map(id => id.toString()));
         if (response.code === 200) {
           this.selectedSensorIds = this.selectedSensorIds.filter(id => !ids.includes(id));
           await this.fetchSensorList();
@@ -170,7 +175,7 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
       }
     },
     
-    toggleSelectSensor(id: string) {
+    toggleSelectSensor(id: number) {
       const index = this.selectedSensorIds.indexOf(id);
       if (index === -1) {
         this.selectedSensorIds.push(id);
@@ -189,10 +194,10 @@ export const useSensorConfigStore = defineStore('sensorConfig', {
     
     createNewSensor(): SensorConfig {
       return {
-        id: '',
+        id: 0,
         sensorID: 0,
         sensorName: '',
-        modelToken: 0,
+        modelToken: '',
         modelName: '',
         port: '485-1',
         modelFieldList: [{ ...DEFAULT_SENSOR_FIELD }]

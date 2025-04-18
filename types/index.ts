@@ -20,20 +20,20 @@ export interface SensorField {
   engUnit: string;
   hydrologicalIdentification: string;
   collectionInstructions: string;
-  ratio: number;
+  ratio: string;
   dataFormat: string;
-  triggerValue: number;
-  upperLimit: number;
-  lowerLimit: number;
-  correctValue: number;
-  ngateval: number;
+  triggerValue: string;
+  upperLimit: string;
+  lowerLimit: string;
+  correctValue: string;
+  ngateval: string;
 }
 
 export interface SensorConfig {
-  id: string;
+  id: number;
   sensorID: number;
   sensorName: string;
-  modelToken: number;
+  modelToken: string;
   modelName: string;
   port: string;
   modelFieldList: SensorField[];
