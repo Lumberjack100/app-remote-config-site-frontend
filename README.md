@@ -24,7 +24,7 @@ Android应用远程配置管理系统是一个专为Android开发人员设计的
 ## 项目代码结构
 
 ```
-app-remote-config-site-frontend/
+miyitong-remote-config-frontend/
 ├── assets/            # 静态资源文件（CSS、图片等）
 ├── components/        # Vue组件
 │   ├── SensorAddModal.vue     # 添加传感器配置的模态框组件
