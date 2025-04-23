@@ -120,7 +120,7 @@ npm run generate
 
 ## 环境变量
 
-- `API_BASE_URL`: API服务器地址（默认：http://localhost:8000/api/v1）
+- `API_BASE_URL`: API服务器地址（默认：http://localhost/api/v1）
 
 ## 默认登录账号
 
